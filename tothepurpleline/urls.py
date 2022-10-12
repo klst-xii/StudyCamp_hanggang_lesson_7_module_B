@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django.urls import path
-from django.urls import re_path
+from django.urls import path, re_path, include
 
 from tothepurpleline.views import home_page, contact_page, update, delete, list_user, updaterecord
 from accounts.views import RegisterView, login_page
@@ -32,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', ProductListView.as_view()),
     path('products/<int:pk>', ProductDetailView.as_view(), name='detailed'),
+    path('products/', include("products.urls"))
 ]
 
 if settings.DEBUG:
