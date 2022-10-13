@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from django.urls import re_path
+from django.urls import path, re_path, include
 
-from .views import home_page, contact_page
+from tothepurpleline.views import home_page, contact_page, update, delete, list_user, updaterecord
 from accounts.views import RegisterView, login_page
 from django.contrib.auth import views as auth_views
 from products.views import ProductListView
@@ -24,9 +23,15 @@ urlpatterns = [
     re_path(r'^products/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view()),
     path('logout/', auth_views.LogoutView.as_view(template_name="auth/logout.html"), name='logout'),
     path('login', login_page, name='login'),
+    
+    path('update/<int:id>', update, name='update'),
+    path('delete/<int:id>', delete, name='delete'),
+    path('update/updaterecord/<int:id>', updaterecord, name='updaterecord'),
+    
     path('admin/', admin.site.urls),
     path('products/', ProductListView.as_view()),
     path('products/<int:pk>', ProductDetailView.as_view(), name='detailed'),
+    path('products/', include("products.urls"))
 ]
 
 if settings.DEBUG:
