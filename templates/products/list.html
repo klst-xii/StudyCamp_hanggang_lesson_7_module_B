@@ -9,7 +9,11 @@
 <body>
 {% include 'base/navbar.html' %}
 {% for object in object_list %}
-    Title: <a href = "{% url 'detailed' object.id %}"> {{ object.title }}</a><br>
+    Title: <a href = "{{ object.get_absolute_url }}"> {{ object.title }}</a><br>
+
+    {%  if object.image %}
+        {{ object.image.url }}
+    {% endif %}
 {% endfor %}
 
 
