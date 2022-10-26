@@ -3,7 +3,6 @@ from products.models import Product
 # Create your views here.
 from django.views.generic import ListView
 from django.views.generic import DetailView
-from django.http import HttpResponse, Http404
 
 
 class ProductListView(ListView):
